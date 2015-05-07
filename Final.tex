@@ -1,0 +1,735 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{epsfig}
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\ifCLASSINFOpdf
+% \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at: 
+% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
+% epslatex.pdf at: http://www.ctan.org/tex-archive/info/
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage[cmex10]{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics. If using
+% it, be sure to load this package with the cmex10 option to ensure that
+% only type 1 fonts will utilized at all point sizes. Without this option,
+% it is possible that some math symbols, particularly those within
+% footnotes, will be rendered in bitmap form which will result in a
+% document that can not be IEEE Xplore compliant!
+%
+% Also, note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
+% There is also a support site at:
+% http://algorithms.berlios.de/index.html
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
+% especially mdwmath.sty and mdwtab.sty which are used to format equations
+% and tables, respectively. The MDWtools set is already installed on most
+% LaTeX systems. The lastest version and documentation is available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/mdwtools/
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+%\usepackage{eqparbox}
+% Also of notable interest is Scott Pakin's eqparbox package for creating
+% (automatically sized) equal width boxes - aka "natural width parboxes".
+% Available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
+
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+% subfigure.sty was written by Steven Douglas Cochran. This package makes it
+% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
+% work, it is a good idea to load it with the tight package option to reduce
+% the amount of white space around the subfigures. subfigure.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at:
+% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
+% subfigure.sty has been superceeded by subfig.sty.
+
+
+
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+% subfig.sty, also written by Steven Douglas Cochran, is the modern
+% replacement for subfigure.sty. However, subfig.sty requires and
+% automatically loads Axel Sommerfeldt's caption.sty which will override
+% IEEEtran.cls handling of captions and this will result in nonIEEE style
+% figure/table captions. To prevent this problem, be sure and preload
+% caption.sty with its "caption=false" package option. This is will preserve
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% (recommended due to many improvements over 1.2) of subfig.sty supports
+% the caption=false option directly:
+%\usepackage[caption=false,font=footnotesize]{subfig}
+%
+% The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
+% The latest version and documentation of caption.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure. The latest version and documentation can be found at:
+% http://www.ctan.org/tex-archive/macros/latex/base/
+
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Documentation is contained in the stfloats.sty comments as well as in the
+% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
+% does not allow \baselineskip to stretch. Authors submitting work to the
+% IEEE should note that IEEE rarely uses double column equations and
+% that authors should try to avoid such use. Do not be tempted to use the
+% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
+% not format its papers in such ways.
+
+
+%\ifCLASSOPTIONcaptionsoff
+%  \usepackage[nomarkers]{endfloat}
+% \let\MYoriglatexcaption\caption
+% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
+%\fi
+% endfloat.sty was written by James Darrell McCauley and Jeff Goldberg.
+% This package may be useful when used in conjunction with IEEEtran.cls'
+% captionsoff option. Some IEEE journals/societies require that submissions
+% have lists of figures/tables at the end of the paper and that
+% figures/tables without any captions are placed on a page by themselves at
+% the end of the document. If needed, the draftcls IEEEtran class option or
+% \CLASSINPUTbaselinestretch interface can be used to increase the line
+% spacing as well. Be sure and use the nomarkers option of endfloat to
+% prevent endfloat from "marking" where the figures would have been placed
+% in the text. The two hack lines of code above are a slight modification of
+% that suggested by in the endfloat docs (section 8.3.1) to ensure that
+% the full captions always appear in the list of figures/tables - even if
+% the user used the short optional argument of \caption[]{}.
+% IEEE papers do not typically make use of \caption[]'s optional argument,
+% so this should not be an issue. A similar trick can be used to disable
+% captions of packages such as subfig.sty that lack options to turn off
+% the subcaptions:
+% For subfig.sty:
+% \let\MYorigsubfloat\subfloat
+% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
+% For subfigure.sty:
+% \let\MYorigsubfigure\subfigure
+% \renewcommand{\subfigure}[2][\relax]{\MYorigsubfigure[]{#2}}
+% However, the above trick will not work if both optional arguments of
+% the \subfloat/subfig command are used. Furthermore, there needs to be a
+% description of each subfigure *somewhere* and endfloat does not add
+% subfigure captions to its list of figures. Thus, the best approach is to
+% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
+% and instead reference/explain all the subfigures within the main caption.
+% The latest version of endfloat.sty and its documentation can obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/endfloat/
+%
+% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
+% later in the document, say, to conditionally put the References on a 
+% page by themselves.
+
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/misc/
+% Read the url.sty source comments for usage information. Basically,
+% \url{my_url_here}.
+
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Conductance of quantum point contact}
+%
+%
+% author names and IEEE memberships
+% note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
+% a structure at a ~ so this keeps an author's name from being broken across
+% two lines.
+% use \thanks{} to gain access to the first footnote area
+% a separate \thanks must be used for each paragraph as LaTeX2e's \thanks
+% was not built to handle multiple paragraphs
+%
+
+\author{{Guanglei Wang,
+        Dragica Vasileska
+        }% <-this % stops a space
+\thanks{G.-L. Wang is a graduate student of the School of Electrical, Computer, and Energy Engineering, Arizona State
+University, Tempe, AZ, 85287 USA e-mail: glwang@asu.edu.}% <-this % stops a space
+\thanks{D. Vasileska is a professor of the School of Electrical, Computer, and Energy Engineering, Arizona State
+University, Tempe, AZ, 85287 USA e-mail: vasileska@asu.edu.}% <-this % stops a space
+}
+
+% The paper headers
+\markboth{Final Project of EEE532, Spring 2015}%
+{Wang \MakeLowercase{\textit{et al.}}: Conductance of quantum point contact}
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+    The classic Landauer's formula relates the conductance of a quantum point contact or wire to transmission
+    probabilities. There are mainly two approaches to calculate the conductance based on this formula: the Green's
+    function techniques and the mode matching techniques. The Green's function approach is frequently used to calculate
+    the total transmission probabilities while the mode matching approach, which is based on the scattering
+    wavefunction, is normally exploited to calculate the partial transmission probabilities. In this final project of
+    ASU EEE532, Spring 2015, we try to learn the mode matching approach formulated by Ando [Phys.Rev. B {\bf 44} , 8017
+    (1991)] \cite{A:1991}. We calculate the conductance of a quantum point contact under a confinement potential as well
+    as the gate voltage. We also consider the effects of short-range disorders. The results show clear quantum
+    quantization phenomenon for the quantum point contact and we discuss several issues that affect the quantized
+    behavior.
+\end{abstract}
+% IEEEtran.cls defaults to using nonbold math in the Abstract.
+% This preserves the distinction between vectors and scalars. However,
+% if the journal you are submitting to favors bold math in the abstract,
+% then you can use LaTeX's standard command \boldmath at the very start
+% of the abstract to achieve this. Many IEEE journals frown on math
+% in the abstract anyway.
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+Transfer matrix, Green's function, quantum point contact.
+\end{IEEEkeywords}
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+The developments of fabrication technology have made it possible to obtain quantum ballistic structure of nanoscale,
+where the quantum effects can be dominated. Because the small scale of the device, its transport behavior should be
+understood based on a atom level theory. Landauer-Buttiker approach is such a classic theory to relate the conductance
+with the transmission probabilities within the linear response regime. Normally, both the Green's function and mode
+matching technicals are used to calculate the conductance. And the two technicals have been proved to be equivalent. In
+Green's function technical, a small imaginary part must be added to the energy to distinguish between the retarded and
+advanced Green's function while the energy used in the mode matching technical is totally real. The mode matching
+technical is formulated by Ando, which is based on matching the wavefunction in the scattering regime to the Bloch modes
+of the lead. In this way we can easily calculate the transmission of each mode. Considering the advantages of the mode
+matching technical and its widely using, in this final project, we try to learn the basic knowledge of the mode matching
+technical and use it to calculate the quantum conductance of a quantum point contact.
+
+This report is organized as follows. In Sec.\ref{Model}, we briefly introduce the form of Hamiltonian in the lattice
+model under the tight-binding approximation. We consider the situation of the ideal wire, the scattering wire and talk
+about detail approaches of calculations. In Sec.\ref{Results}, we show our results of the behavior of the conductance
+under the variation of some system parameters. The main conclusions are made in Sec.\ref{Conclusion}.
+
+\section{Model}\label{Model}
+We consider a square lattice with lattice constant $a$ under the tight-binding approximation. Each atom has a pair of
+coordinates $(i,j)$ to represent its position. The nearest-neighbor interaction is characterized by the transfer
+integral, $-t$. In this report we use $t=E_F(\frac{1}{2\pi})^2(\frac{\lambda_F}{a})^2$. If the system is under the
+effect of magnetic field with Landau gauge, the interaction Hamiltonian of the system can be written as
+\begin{equation}
+    \begin{split}
+        \langle l,j|\mathcal{H}|l+1,j\rangle&=-texp(2\pi i\tilde{H}j) \\
+        \langle l,j|\mathcal{H}|l,j+1\rangle&=-t,
+    \end{split}
+    \label{eq:H}
+\end{equation}
+where there is a so-called Peierls phase factor $exp(2\pi i\tilde{H}j), j=1,\dots,M$. Here the strength of magnetic
+field is introduced through $\tilde{H}=\Phi/\Phi_0$ with $\Phi=Ha^2$ being the magnetic flux across a unit cell and
+$\Phi_0=ch/e$ is the magnetic flux quantum. The magnetic field is expressed as
+$\tilde{H}=\pi\frac{\hbar\omega_c}{E_F}(\frac{a}{\lambda_F})^2$. The on-site energy is expressed as the diagonal element
+of the Hamiltonian which is written as
+\begin{equation}
+    \langle l,j|\mathcal{H}|l,j\rangle=4t+v(l,j),
+    \label{eq:H2}
+\end{equation}
+where the first term on the right hand side is nothing but a shift of the total energy and the second term denotes the
+confinement energy. To consider the effect of short-range disorders, we can just add an random potential to each
+diagonal element of the Hamiltonian. The strength of the random disorder is within $[-W/2,W/2]$. Here we have
+\begin{equation}
+    \frac{W}{E_F}=(\frac{6\lambda_F^3}{\pi^3a^2\Lambda})^{1/2},
+    \label{}
+\end{equation}
+where $\Lambda$ is the mean free path of the electrons.
+
+\subsection{Ideal wire}
+The simplest situation we can have in the quantum transport problem is an ideal wire, i.e., $v(l,j)=0$ for all the
+lattice points. Suppose the ideal wire is infinite along the $x$ direction but is consisted of $M$ lattice sites in the
+$y$ direction. As we are under the tight-binding approximation, the equation of motion can be described as
+\begin{equation}
+    (E-\mathcal{H}_0)\psi_i+tP\psi_{i-1}+tP^*\psi_{i+1}=0,
+    \label{eq:motion}
+\end{equation}
+where $\psi_i$ is a vector of the amplitudes of the $i$th cell and $P$ is the coupling Hamiltonian between the nearest
+cells:
+\begin{equation}
+    P_{ll'}=exp(2\pi i\tilde{H}l)\delta_{l,l'},
+    \label{eq:P}
+\end{equation}
+where $l,l'=1,\dots,M$. 
+
+As in the ideal wire, the Hamiltonian for each single slice is the same, i.e., $\mathcal{H}_0$, which is also an
+$M\times M$ matrix:
+\begin{equation}
+    \mathcal{H}_0=\left[
+        \begin{array}{ccccc}
+            v_1+4t & -t & 0 & \dots & 0 \\
+            -t & v_2+4t & -t & \dots & 0 \\
+            0 & -t & v_3+4t & \dots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & \dots & v_M+4t
+        \end{array} \right].
+    \label{eq:H0}
+\end{equation}
+
+The advantage of the ideal wire is that the Bloch theorem can be easily used, i.e., the wavefunction should be
+constructed by a function which has the same period as the potential multiplies an envelop modulation. So we can assume
+\begin{equation} \psi_i=\lambda^i\psi_0.  \label{eq:bloch} \end{equation}
+
+Then from the equation of motion we can have
+\begin{equation*}
+    \lambda\psi_i=t^{-1}P(\mathcal{H}_0-E)\psi_i-P^2\psi_{i-1},
+\end{equation*}
+which can lead to a $2M\times2M$ eigenvalue problem:
+\begin{equation}
+    \lambda\left[
+        \begin{array}{c}
+            \psi_i \\ \psi_{i-1}
+        \end{array}
+    \right]=\left[
+        \begin{array}{cc}
+            t^{-1}P(\mathcal{H}_0-E) & -P^2 \\ I & 0
+    \end{array}\right]
+    \left[ \begin{array}{c}
+            \psi_i \\ \psi_{i-1}
+    \end{array}\right].
+    \label{eq:eig}
+\end{equation}
+
+Here in the above equation, $E$ is understood as the chemical potential which can be setup through the gate voltage. For
+a given gate energy $E$, we can have an eigenvalue problem which can result in $2M$ eigenvalues and $2M$ eigenvectors.
+The dimension of the eigenvector is $2M\times1$ which comes from the fact that the above equation couples $\psi_i$ and
+$\psi_{i+1}$, and each of them is of dimension $M\times1$. Based on the form of our equation, the first $M$ elements
+of the eigenvector belong to $\psi_i$ and the following $M$ elements belong to $\psi_{i-1}$. The origin of the
+$2M$ eigenvalues is that we should have $M$ left-going and $M$ right-going waves. Of course, there should be propagating
+modes and evanescent modes. One can distinguish right- and left-going evanescent modes based on the magnitudes of these
+corresponding eigenvalues, i.e., right-going evanescent modes have $|\lambda(+)|<1$ and left-going evanescent modes have
+$|\lambda(-)|>1$. However, one can not tell the direction of the propagating modes directly through the eigenvalues or
+wave vectors. Actually, the quantity that is concerned is the group velocity. Propagating modes have unit eigenvalue
+magnitude but different signs of group velocities \cite{KBKZK:2005,BS:1989}. The group velocity for a given mode is
+expressed as \cite{KBKZK:2005}
+\begin{equation} v_n(\pm)=-\frac{2a}{\hbar}Im[\lambda_n(\pm){\bf
+    u}_n(\pm)^\dagger\mathcal{H}_{i,i+1}^\dagger{\bf u}_n(\pm)],
+    \label{}
+\end{equation}
+so the right propagating mode has positive group velocity while the left propagating mode has a negative one.
+
+After distinguishing the left- and right-going modes we can construct some useful matrices, which are
+\begin{equation}
+    U(\pm)=({\bf u}_1(\pm),\dots,{\bf u}_M(\pm))
+    \label{}
+\end{equation}
+and
+\begin{equation}
+    \Lambda(\pm)=\left[
+        \begin{array}{ccc}
+            \lambda_1(\pm) & \dots & 0 \\
+            \vdots & \ddots & \vdots \\
+            0 & \dots & \lambda_M(\pm)
+    \end{array}\right].
+    \label{}
+\end{equation}
+Here the matrix $U(\pm)$ is nothing but a group of eigenvectors for the right(left) going modes. We will later see that it
+is used to calculate how much transmission each mode contributes. At last we need to define
+\begin{equation}
+    F(\pm)=U(\pm)\Lambda(\pm)U^{-1}(\pm).
+    \label{}
+\end{equation}
+
+\subsection{Scattering problem}
+After obtaining the transport modes for the ideal wire, we now move on to the scattering problem. The scattering can be
+as simple as the effect of the confinement potential. When the potential profile of the device is not uniform, the
+states of electrons will be disturbed, i.e., scattering will happen. The basic approach to deal with this scattering in
+the mode matching technical \cite{BKJ:1991} is to calculate the relation of the out-going waves with the in-going waves.
+For example, if we concern transmission, we should focus on the right propagating waves on the most left and right parts
+of device. If we consider the reflection, we should focus on the left propagating waves on the most left part of the
+device. Normally, we assume the leads are semi-infinite and ideal and the length of the scattering regime is $N$, i.e.,
+is consisted of $N$ lattice points.
+
+To be concrete, we consider the interface of the left lead and the device
+\begin{equation}
+    \psi_0=\psi_0(+)+\psi_0(-).
+    \label{}
+\end{equation}
+And we can also relate $\psi_{-1}$ to $\psi_{0}$ through the $F(\pm)$ matrices
+\begin{equation}
+    C_{-1}=F^{-1}(+)\psi_0(+)+F^{-1}(-)\psi_0(-).
+    \label{}
+\end{equation}
+Then we can exploit the equation of motion at cell $0$ to get
+\begin{equation}
+    (E-\tilde{\mathcal{H}}_0)\psi_0=tP^*\psi_1=-tP[F^{-1}(+)-F^{-1}(-)]\psi_0(+),
+    \label{eq:h0}
+\end{equation}
+where
+\begin{equation}
+    \tilde{\mathcal{H}}_0=\mathcal{H}_0-tPF^{-1}(-).
+    \label{}
+\end{equation}
+
+Similarly, for the most right part of the device we can have
+\begin{equation}
+    (E-\tilde{\mathcal{H}}_{N+1})\psi_{N+1}+tP\psi_N=0,
+    \label{}
+\end{equation}
+where 
+\begin{equation}
+    \tilde{\mathcal{H}}_{N+1}=\mathcal{H}_{N+1}-tP^*F(+).
+    \label{}
+\end{equation}
+Here $\tilde{\mathcal{H}}_0$ and $\tilde{\mathcal{H}}_{N+1}$ actually already contain the effects coming from the two
+semi-infinite leads. We should notice that the right hand side of Eq.\ref{eq:h0} is not $0$. Indeed, the term
+$-tP[F^{-1}(+)-F^{-1}(-)]\psi_0(+)$ serves as a source of the current.
+
+To calculate the effect of the source term on the most right part of the device, we can use the Green's function
+technical. Here, we should emphasis that the Green's function used here is just a tool to calculate the wavefunction on
+the most right side of the device, after which we should use mode matching technicals to match the wavefunction to the
+eigenfunctions of the ideal leads. We can define the Green's function $G$ as
+\begin{equation}
+    G=\frac{1}{E-\tilde{\mathcal{H}}},
+    \label{}
+\end{equation}
+with
+\begin{equation}
+    \tilde{\mathcal{H}}=\left[
+        \begin{array}{cccccc}
+            \tilde{\mathcal{H}}_0 & -tP^* & 0 & \dots & 0 & 0 \\
+            -tP & \tilde{\mathcal{H}}_1 & -tP^* & \dots & 0 & 0 \\
+            0 & -tP & \tilde{\mathcal{H}}_2 & \dots & 0 & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+            0 & 0 & 0 & \dots & \tilde{\mathcal{H}}_N & -tP^* \\
+            0 & 0 & 0 & \dots & -tP & \tilde{\mathcal{H}}_{N+1}
+    \end{array}\right].
+    \label{}
+\end{equation}
+
+The role of the source is reflected in the coupling of $\psi_0$ and $\psi_{N+1}$
+\begin{equation}
+    \begin{split}
+    \psi_{N+1}(+)&=\psi_{N+1} \\
+    &=-t\langle N+1|G|0\rangle P[F^{-1}(+)-F^{-1}(-)]\psi_0(+).
+\end{split}
+    \label{}
+\end{equation}
+
+From which the transmission coefficient $t_{\mu\nu}$ for the incident channel $\nu$ to the out-going channel $\mu$ is
+\begin{equation}
+    \begin{split}
+    t_{\mu\nu}=&(\frac{v_\mu}{v_\nu})^{1/2}\{-tU^{-1}(+)\langle N+1|G|0\rangle \\
+    &\times P[F^{-1}(+)-F^{-1}(-)]U(+)\}_{\mu\nu},
+\end{split}
+    \label{}
+\end{equation}
+where $v_\nu$ and $v_\mu$ are the velocity for each channel, respectively.
+
+\subsection{Recursive formulas}
+As there are matrix inverse manipulations in the calculations of Green's function, we can exploit an recursive formulas
+to speed up the calculation. The essence of this formulas is to replace the inverse of a very large matrix (the same
+dimension as the number of atoms in the device) with many inverses of small matrices (the same dimension as the number
+of atoms in the slice) \cite{A:1990}. To be concrete, in our device , the recursive formulas is
+\begin{equation}
+    \begin{split}
+        \langle i+1|G^{(i+1)}|i+&1\rangle^{-1} \\
+        &=E-\tilde{\mathcal{H}}_{i+1}-\tilde{\mathcal{H}}_{i+1,i}\langle i|G^{(i)}|i\rangle\tilde{\mathcal{H}}_{i,i+1},
+        \\
+        \langle i+1|G^{(i+1)}|0\rangle& \\
+        &=\langle i+1|G^{(i+1)}|i+1\rangle\tilde{\mathcal{H}}_{i+1,i}\langle i|G^{(i)}|0\rangle,
+    \end{split}
+    \label{}
+\end{equation}
+the initial condition is $\langle0|G^{(0)}|0\rangle=(E-\tilde{\mathcal{H}}_0)^{-1}$.
+
+\section{Results}\label{Results}
+
+\begin{figure}
+    \centering
+    \epsfig{figure=figure1.eps,width=\linewidth}
+    \caption{An example of the confinement potential profile used to simulate a quantum point contact. $(a)$ Confinement
+    potential along $y$ direction under several different $x$ positions. $(b)$ A contour view of the confinement
+potential of the quantum point contact. Note that the scale for the $x$ and $y$ axises are different. The other
+parameters are $V/E_F=0.5$, $\Delta/\lambda_F=1$, and $L_y/\lambda_F=4$. The solid lines in $(a)$ represents the
+potential profile at $x/L_x=0, 0.66, 0.75, 0.83$.}
+    \label{fig1}
+\end{figure}
+
+We consider a wire with length $L_x$ and width $L_y$ and under the influence of a confinement potential
+\begin{equation}
+    \begin{split}
+        V(x,y)=&\frac{V}{2}[1+cos(\frac{2\pi x}{L_x})] \\
+        &+E_F(\frac{y-y_+(x)}{\Delta})^2\theta(y-y_+(x)) \\
+        &+E_F(\frac{y-y_-(x)}{\Delta})^2\theta(-(y-y_-(x))),
+    \end{split}
+    \label{}
+\end{equation}
+where $\theta(t)$ is a step function and 
+\begin{equation}
+    y_{\pm}(x)=\pm\frac{L_y}{4}[1-cos(\frac{2\pi x}{L_x})].
+    \label{}
+\end{equation}
+In Fig.\ref{fig1} we show a typical profile of this confinement potential. Fig.\ref{fig1} $(a)$ is the example of the
+confinement potential under some different $x$ positions. The minimum energy under $x/L_x=0$ is called the bottom
+energy.  Fig.\ref{fig1} $(b)$ is a contour figure of the confinement potential all over the device. We use a much
+smaller mesh than that used in simulation to show the detail of this confinement. 
+
+\begin{figure} \centering
+    \epsfig{figure=figure2.eps,width=\linewidth} \caption{Total conductance through a quantum point contact under
+        different bottom energy $V/E_F$. The lines with different colors represent different gate voltage, i.e., red:
+        $E/E_F=1.0$, blue: $E/E_F=2.0$, pink: $E/E_F=0.5$.  The different line styles represents different length of the
+    quantum point contact, i.e., solid: $L_x/\lambda_F=16.0$, dash: $L_x/\lambda_F=8.0$, dash-dot: $L_x/\lambda_F=4.0$}
+    \label{fig2}
+\end{figure}
+
+Fig.\ref{fig2} shows the dependence of the total conductance of the quantum point contact on the bottom energy,
+$V/E_F$. The red, blue and pink curves are correspondening to the gate energy $E/E_F=2.0, 1.0, 0.5$, respectively. For
+the different line styles under the same color, they represent different lengths of the device. The blue lines are the
+same as that in the work of T. Ando's, which proves the valid of our program. We can see that for a rather long device,
+there is a very clear conductance quantization phenomenon. We can see the conductance steps obviously. However, when the
+length of the device becomes smaller, the conductance becomes less quantized as the potential variation is far from
+being adiabatic. Furthermore, we can also see that the gate voltage also plays a significant role here. When the gate
+energy, or the chemical potential, is high, there should be more propagating modes in the leads, which increases the
+conductance. Another physical picture to understand this is through the band structure. As we increase the gate
+voltage, the chemical potential will have more crosses with the band structure, and more crosses mean more transporting
+modes.  In Fig.\ref{fig2}, we can also see the effect of the bottom energy very well. We can see that for a long device,
+a bottom energy which is lower than the gate energy is high enough to block the transport of the device. However, for a
+short device, it is reasonable that the transport should be robust than that of the long one.
+
+\begin{figure}
+    \centering
+    \epsfig{figure=figure3.eps,width=\linewidth}
+    \caption{Conductance distribution among out-going channels as a function of the bottom energy $V/E_F$ through the
+    quantum point contact. The blue curves are conductances for different single channels and the red curves are for sum
+channels. $C_i$ denotes channel $i$ with $i=1,2,3,4$. The gate energy used here is $E/E_F=1.0$ so that there are four
+propagating modes in the ideal lead.}
+    \label{fig3}
+\end{figure}
+
+To exploit the advantage of the mode matching approach, we show the quantum conductance for each mode separately in
+Fig.\ref{fig3}. It shows the detail of the variation of each propagating mode with the change of the bottom energy. It
+clearly shows that the conductance can not go beyond $e^2/\pi\hbar$ for one channel, which results from the Fermi
+property, or the Pauli exclusion principle, of electrons. We can see that when the bottom energy becomes higher and the
+total conductance jumps to a lower value, the conductance of the highest channel jumps from close to unity to close one.
+This is because the confinement potential blocks the transport of that channel. Another interesting phenomenon is that
+the conductance of the very high channel's can keep finite, even close to zero, within a rather large bottom energy
+regime.
+\begin{figure}
+    \centering
+    \epsfig{figure=figure4.eps,width=\linewidth}
+    \caption{Total conductance through a quantum point contact under different gate energy $E/E_F$. The lines with
+    different colors represent different bottom energy, i.e., red: $V/E_F=1.0$, blue: $V/E_F=0.5$.  The different line
+styles represents different length of the quantum point contact, i.e., solid: $L_x/\lambda_F=16.0$, dash:
+$L_x/\lambda_F=8.0$, dash-dot: $L_x/\lambda_F=4.0$} \label{fig4}
+\end{figure}
+\begin{figure}
+    \centering
+    \epsfig{figure=figure5.eps,width=\linewidth}
+    \caption{Conductance distribution among out-going channels as a function of the gate energy $E/E_F$ through the
+    quantum point contact. The blue curves are conductances for different single channels and the red curves are for sum
+channels. $C_i$ denotes channel $i$ with $i=1,2,3,4$. When the gate energy is higher than $E_F$, more propagating modes
+can be existed in the quantum point contact. Here we just show the first four channels.}
+    \label{fig5}
+\end{figure}
+
+Except the dependence of the conductance on the bottom energy, we also show the relation of the conductance with the
+gate energy $E/E_F$. The results are shown in Fig.\ref{fig4}. We do two groups of simulations with the bottom energy
+$V/E_F=0.5, 1.0$ and also under three different device lengths. From Fig.\ref{fig4}, we can see a typical ribbon
+conductance behavior. The conductance starts to appear above the bottom energy of each case, which is shown by the
+vertical dot line. Again, the length of the device can change the quantization behavior. The detail variation of each
+channel is shown in Fig.\ref{fig5}. An interesting behavior of the channel conductance is that there is a trend to
+decrease after it reaches the maximum value, i.e., one, and then increases back to unity. Also, from the behavior of the
+single channel, we can inform the minimum energy of several bands in the band structure.
+
+\begin{figure}
+    \centering
+    \epsfig{figure=figure6.eps,width=\linewidth}
+    \caption{Examples of the conductances through a quantum point contact as a function of the bottom energy under the
+    effect of short-range disorders characterized by the mean free path $\Lambda$. Here we show 100 realizations of the
+random disorders with $\Lambda/\lambda_F=200.0$, blue dots, and $\Lambda/\lambda_F=20.0$, red dots, respectively. The
+gate energy we used is $E/E_F=1.0$.}
+    \label{fig6}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \epsfig{figure=figure7.eps,width=\linewidth}
+    \caption{Examples of the conductances through a quantum point contact as a function of the gate energy under the
+    effect of short-range disorders characterized by the mean free path $\Lambda$. Here we show 100 realizations of the
+random disorders with $\Lambda/\lambda_F=200.0$, blue dots, and $\Lambda/\lambda_F=20.0$, red dots, respectively. The
+bottom energy we used is $V/E_F=0.5$.}
+    \label{fig7}
+\end{figure}
+
+Another interesting question is the effect of disorders on the conductance of the quantum point contact. Of course,
+there are many kinds of disorders, and here we use the simplest one, i.e., the short-range random disorder.
+Mathematically, we just need to add a random potential to each diagonal element of the Hamiltonian. The simulation
+results are shown in Fig.\ref{fig6} and Fig.\ref{fig7} with the variation of the bottom energy and gate energy,
+respectively. For each case, we make 100 realizations of the random disorder with the same strength, $W$. The strength
+of the disorder is characterized by the mean free path $\Lambda$. The blue dots are for $\Lambda/\lambda_F=200.0$ and
+the red dots are for $\Lambda/\lambda_F=20.0$, where a larger mean free path denotes a weaker disorder. The results are
+agreed with the expectation. There is a clear signature that the blue dots are more focused than the red dots. And a
+stronger disorder can even destroy the quantization of the conductance. Again, the gate energy we used in Fig.\ref{fig6}
+is $E/E_F=1.0$ and the bottom energy we used in Fig.\ref{fig7} is $V/E_F=0.5$.
+
+\section{Conclusion}\label{Conclusion}
+
+We study the transport properties of a quantum point contact under a confinement. We calculate the conductance of the
+device with the change of the bottom energy and gate energy. We see that the quantum conductance are quantized for a
+relative long device. However, the quantization becomes unclear as we decrease the length of the device. We also study
+the partial transport of each channel in the device. The results show that each channel can contribute one unity of
+conductance at best. The higher the gate voltage is, the more the transport channels are. At last, we study the effects
+of short-range disorders on the transport behavior. As expected, the disorder makes an overall decrease of the
+conductance and makes the quantization less obvious.
+
+\section*{Acknowledgment}
+
+
+G.-L. Wang would like to thank Prof. Richard Akis for helpful discussion. And thank Prof. Dragica Vasileska for her
+wonderful lectures in ASU EEE532, Spring 2015.
+
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,Final}
+
+% that's all folks
+\end{document}
+
+
